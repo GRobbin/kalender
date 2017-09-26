@@ -1,5 +1,5 @@
 {
-    "name": "Calender App SvK",
+    "name": "calender-app-svk",
     "version": "1.0.0",
     "description": "A calender app for SvK",
     "scripts": {
@@ -14,7 +14,7 @@
         "test": "mocha --reporter progress buildScripts/testSetup.js \"src/**/*.test.js\"",
         "test:watch": "npm run test -- --watch"
     },
-    "author": "Cory House",
+    "author": "Robin Garefelt",
     "license": "MIT",
     "dependencies": {
       "whatwg-fetch": "1.0.0"
