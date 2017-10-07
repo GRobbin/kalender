@@ -1,4 +1,5 @@
 import path from 'path';
+import BrowserSyncPlugin from 'browser-sync-webpack-plugin';
 
 export default {
   debug: true,
@@ -13,7 +14,25 @@ export default {
     publicPath: '/',
     filename: 'bundle.js'
   },
-  plugins: [],
+  plugins: [
+    new BrowserSyncPlugin({
+      // browse to http://localhost:3000/ during development,
+      // ./public directory is being served
+      host: 'localhost',
+      port: 3001,
+      proxy: 'http://localhost:3000/',
+      files: [
+        "./buildScripts/srcServer.js",
+        "./src/*.html",
+      ]
+    },
+    {
+      // prevent BrowserSync from reloading the page
+      // and let Webpack Dev Server take care of this
+      reload: false
+    }
+  )
+  ],
   module: {
     preLoaders: [
       { test: /\.json$/, loader: 'json-loader'},
