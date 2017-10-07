@@ -15,9 +15,19 @@ export default {
   },
   plugins: [],
   module: {
+    preLoaders: [
+      { test: /\.json$/, loader: 'json-loader'},
+    ],
     loaders: [
       {test: /\.js$/, exclude: /node_modules/, loaders: ['babel']},
       {test: /\.css$/, loaders: ['style','css']}
     ]
+  },
+  node: {
+    console: 'empty',
+    fs: 'empty',
+    net: 'empty',
+    tls: 'empty',
+    node: 'empty'
   }
 }
