@@ -1,10 +1,9 @@
 import path from 'path';
+import webpack from 'webpack';
 // import BrowserSyncPlugin from 'browser-sync-webpack-plugin';
 
 export default {
-  debug: true,
   devtool: 'inline-source-map',
-  noInfo: false,
   entry: [
     path.resolve(__dirname, 'src/index')
   ],
@@ -32,21 +31,27 @@ export default {
   //     reload: false
   //   }
   // )
+  new webpack.LoaderOptionsPlugin({
+    debug: true
+  })
   ],
   module: {
-    preLoaders: [
-      { test: /\.json$/, loader: 'json-loader'},
-    ],
     loaders: [
-      {test: /\.js$/, exclude: /node_modules/, loaders: ['babel']},
-      {test: /\.css$/, loaders: ['style','css']}
+      {test: /\.js$/, exclude: /node_modules/, loaders: ['babel-loader']},
+      {test: /\.css$/, loaders: ['style-loader','css-loader']},
+      {test: /\.json$/, loader: 'json-loader'}
     ]
   },
   node: {
-    console: 'empty',
+    console: false,
+    global: true,
+    process: true,
+    Buffer: true,
     fs: 'empty',
     net: 'empty',
     tls: 'empty',
-    node: 'empty'
+    __filename: "mock",
+    __dirname: "mock",
+    setImmediate: true
   }
 }
