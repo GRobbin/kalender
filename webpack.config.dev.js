@@ -1,5 +1,5 @@
 import path from 'path';
-import BrowserSyncPlugin from 'browser-sync-webpack-plugin';
+// import BrowserSyncPlugin from 'browser-sync-webpack-plugin';
 
 export default {
   debug: true,
@@ -15,23 +15,23 @@ export default {
     filename: 'bundle.js'
   },
   plugins: [
-    new BrowserSyncPlugin({
-      // browse to http://localhost:3000/ during development,
-      // ./public directory is being served
-      host: 'localhost',
-      port: 3001,
-      proxy: 'http://localhost:3000/',
-      files: [
-        "./buildScripts/srcServer.js",
-        "./src/*.html",
-      ]
-    },
-    {
-      // prevent BrowserSync from reloading the page
-      // and let Webpack Dev Server take care of this
-      reload: false
-    }
-  )
+  //   new BrowserSyncPlugin({
+  //     // browse to http://localhost:3000/ during development,
+  //     // ./public directory is being served
+  //     host: 'localhost',
+  //     port: 3001,
+  //     proxy: 'http://localhost:3000/',
+  //     files: [
+  //       "./src/*.html",
+  //     ],
+  //     open: false // do not automatically open browser
+  //   },
+  //   {
+  //     // prevent BrowserSync from reloading the page
+  //     // and let Webpack Dev Server take care of this
+  //     reload: false
+  //   }
+  // )
   ],
   module: {
     preLoaders: [
