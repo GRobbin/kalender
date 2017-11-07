@@ -1,5 +1,5 @@
 /* eslint-disable no-console */
-import request from 'request';
+import request from 'request-promise-native';
 import path from 'path';
 
 
@@ -28,20 +28,23 @@ var showDates = {
         }
         // document.getElementById('date').innerHTML = dates;
         // document.getElementById('year').innerHTML = fullYear;
-        console.log(jsonDates[3]);
+        return jsonDates;
 
     },
-    scrapedDates: function () {
+    scrapedDates: function (x) {
 
-        const options = {  
+            const options = {  
             url: 'http://localhost:3000/data',
             method: 'GET'
         };
+        var that = this;
+         request(options).then(function(body) { 
+            var json = JSON.parse(body);
+            console.log(json);
+            console.log(that.getMonths(x));
+        })
         
-        request(options, function(err, res, body) { 
-            var json = JSON.parse(body)
-            console.log(json[3]);
-        });
     }
-};
+}
+;
 export { dateNames, showDates }

@@ -2,8 +2,8 @@
 import './index.css';
 import {showDates} from './AppAPI/appAPI';
 
-showDates.scrapedDates();
-showDates.getMonths(2);
+
+console.log(showDates.scrapedDates(3));
 
 
 

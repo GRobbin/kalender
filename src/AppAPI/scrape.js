@@ -20,19 +20,24 @@ export default function () {
 
       $('.post').each(function (i, elem) {
         datesArr[i] = {};
+
+        var text = $(this).find('br').map(function(){
+          return this.nextSibling.data;
+      });
         datesArr[i].date = $(this).find('.date').text();
-        datesArr[i].name = $(this, 'p').html().split("<br>")[1];
+        datesArr[i].name = text[0];
 
       })
       var content = JSON.stringify(datesArr);
 
-      fs.writeFile('./docs/kyrkoar.json', content, 'utf8', function (err) {
-        if (err) {
-          return console.log(err);
-        }
+      // fs.writeFile('./docs/kyrkoar.json', content, 'utf8', function (err) {
+      //   if (err) {
+      //     return console.log(err);
+      //   }
 
-        console.log("The file was saved!");
-      });
+      //   console.log("The file was saved!");
+      // });
+      console.log(content);
 
     }
   });

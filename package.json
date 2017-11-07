@@ -17,6 +17,7 @@
   "author": "Robin Garefelt",
   "license": "MIT",
   "dependencies": {
+    "request-promise-native": "^1.0.5",
     "whatwg-fetch": "2.0.3"
   },
   "devDependencies": {
@@ -57,6 +58,9 @@
     "webpack-md5-hash": "0.0.5"
   },
   "nodemonConfig": {
-    "ignore": ["test/*", "docs/*"]
+    "ignore": [
+      "test/*",
+      "docs/*"
+    ]
   }
 }
