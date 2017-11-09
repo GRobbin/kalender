@@ -3,7 +3,7 @@ import './index.css';
 import {showDates} from './AppAPI/appAPI';
 
 
-console.log(showDates.scrapedDates(3));
+console.log(showDates.scrapedDates(11));
 
 
 

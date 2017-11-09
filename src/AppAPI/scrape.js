@@ -30,14 +30,13 @@ export default function () {
       })
       var content = JSON.stringify(datesArr);
 
-      // fs.writeFile('./docs/kyrkoar.json', content, 'utf8', function (err) {
-      //   if (err) {
-      //     return console.log(err);
-      //   }
+      fs.writeFile('./docs/kyrkoar.json', content, 'utf8', function (err) {
+        if (err) {
+          return console.log(err);
+        }
 
-      //   console.log("The file was saved!");
-      // });
-      console.log(content);
+        console.log("The file was saved!");
+      });
 
     }
   });

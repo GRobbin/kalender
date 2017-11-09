@@ -44,7 +44,7 @@ app.listen(port, function (err) {
   }
 });
 reload(app);
-scrape();
+// scrape();
 
 // app.listen(port, function(err){
 //     if (err){

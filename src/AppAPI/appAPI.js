@@ -17,12 +17,11 @@ var showDates = {
 
         startDate.setMonth(x, 1);
         endDate.setMonth(y, 1);
-        var dates = "";
-        var fullYear = startDate.getFullYear();
+
         var jsonDates = [];
-        for (var i= 0; startDate < endDate; i++) {
+        for (var i = 0; startDate < endDate; i++) {
             jsonDates[i] = {};
-            jsonDates[i].date =  startDate.toLocaleDateString()
+            jsonDates[i].date = startDate.toLocaleDateString()
             jsonDates[i].day = date.days[startDate.getDay()] + ' ' + startDate.getDate() + ' ' + date.months[startDate.getMonth()];
             startDate.setDate(startDate.getDate() + 1);
         }
@@ -31,20 +30,39 @@ var showDates = {
         return jsonDates;
 
     },
-    scrapedDates: function (x) {
+    scrapedDates: function (month) {
 
-            const options = {  
+        const options = {
             url: 'http://localhost:3000/data',
             method: 'GET'
         };
         var that = this;
-         request(options).then(function(body) { 
-            var json = JSON.parse(body);
-            console.log(json);
-            console.log(that.getMonths(x));
+        request(options).then(function (body) {
+            var dateNames = JSON.parse(body);
+            var dates = that.getMonths(month);
+            console.log(dateNames);
+            console.log(dates);
+            let i = 0;
+            let x = dates.length;
+
+            for (; i < x; i++) {
+                let k = 0;
+                let y = dateNames.length;
+                let isNot = '';
+
+                for (; k < y; k++) {
+                    if (dates[i].date == dateNames[k].date) {
+                        console.log(dateNames[k].date + ' ' + dateNames[k].name);
+                        isNot = dateNames[k].date;
+                    }
+                }
+                if (dates[i].date != isNot) {
+                    console.log(dates[i].date);
+                }
+            }
         })
-        
+
     }
 }
-;
+    ;
 export { dateNames, showDates }
