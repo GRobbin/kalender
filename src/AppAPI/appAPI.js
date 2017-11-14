@@ -44,6 +44,7 @@ var showDates = {
             console.log(dates);
             let i = 0;
             let x = dates.length;
+            let datesContent = '';
 
             for (; i < x; i++) {
                 let k = 0;
@@ -52,17 +53,23 @@ var showDates = {
 
                 for (; k < y; k++) {
                     if (dates[i].date == dateNames[k].date) {
-                        console.log(dateNames[k].date + ' ' + dateNames[k].name);
-                        isNot = dateNames[k].date;
+                        datesContent += `<tr>
+                        <td>${dates[i].day}</td>
+                        <td>${dateNames[k].name}</td>
+                        </tr>`
+
+                        isNot = dates[i].day;
                     }
                 }
-                if (dates[i].date != isNot) {
-                    console.log(dates[i].date);
+                if (dates[i].day != isNot) {
+                    datesContent += `<tr>
+                    <td>${dates[i].day}</td>
+                    </tr>`
                 }
             }
+            document.getElementById('datum').innerHTML = datesContent;
         })
 
     }
-}
-    ;
+};
 export { dateNames, showDates }
