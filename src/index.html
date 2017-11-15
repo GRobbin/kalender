@@ -10,13 +10,20 @@
       <input id="month" type="number" name="month" min="0" max="11"></input>
       <button id="knapp">Välj</button>
     </form>
-  <table>
-    <thead>
-      <th>Dag</th>
-      <th>Namn</th>
-    </thead>
-  <tbody id="datum"></tbody>
-  </table>
+
+  <div id="datum"></div>
+  <div id="add-content">
+    <button id="content">Lägg till</button>
+    <form id="day-of-week">
+      <input type="radio" name="day" value="Måndag">Måndag</br>
+      <input type="radio" name="day" value="Tisdag">Tisdag</br>
+      <input type="radio" name="day" value="Onsdag">Onsdag</br>
+      <input type="radio" name="day" value="Torsdag">Torsdag</br>
+      <input type="radio" name="day" value="Fredag">Fredag</br>
+      <input type="radio" name="day" value="Lördag">Lördag</br>
+      <input type="radio" name="day" value="Söndag">Söndag</br>
+    </form>
+  </div>
     <script src="bundle.js"></script>
     <script src="/reload/reload.js"></script> 
   </body>

@@ -5,3 +5,23 @@ body {
 table th {
   padding: 5px;
 }
+
+div#datum {
+  column-count: 2;
+  float: left;
+  width: 80%;
+}
+
+p#dag {
+  margin: 10px 0 0 0;
+  font-weight: bold;
+}
+
+p#namn {
+  margin: 0;
+  font-weight: bold;
+}
+
+div#add-content {
+  float: right;
+}

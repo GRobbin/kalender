@@ -3,26 +3,27 @@ import request from 'request-promise-native';
 import path from 'path';
 
 
-var dateNames = {
+let dateNames = {
     days: ['Söndag', 'Måndag', 'Tisdag', 'Onsdag', 'Torsdag', 'Fredag', 'Lördag'],
     months: ['Januari', 'Februari', 'Mars', 'April', 'Maj', 'Juni', 'Juli', 'Augusti', 'September', 'Oktober', 'November', 'December']
 };
 
-var showDates = {
+let showDates = {
     getMonths: function (x) {
-        var date = dateNames;
-        var startDate = new Date();
-        var endDate = new Date();
-        var y = x + 1;
+        let date = dateNames;
+        let startDate = new Date();
+        let endDate = new Date();
+        let y = x + 1;
 
         startDate.setMonth(x, 1);
         endDate.setMonth(y, 1);
 
-        var jsonDates = [];
-        for (var i = 0; startDate < endDate; i++) {
+        let jsonDates = [];
+        for (let i = 0; startDate < endDate; i++) {
             jsonDates[i] = {};
             jsonDates[i].date = startDate.toLocaleDateString()
-            jsonDates[i].day = date.days[startDate.getDay()] + ' ' + startDate.getDate() + ' ' + date.months[startDate.getMonth()];
+            jsonDates[i].fullDate = date.days[startDate.getDay()] + ' ' + startDate.getDate() + ' ' + date.months[startDate.getMonth()];
+            jsonDates[i].day = date.days[startDate.getDay()];
             startDate.setDate(startDate.getDate() + 1);
         }
         // document.getElementById('date').innerHTML = dates;
@@ -36,10 +37,10 @@ var showDates = {
             url: 'http://localhost:3000/data',
             method: 'GET'
         };
-        var that = this;
+        let that = this;
         request(options).then(function (body) {
-            var dateNames = JSON.parse(body);
-            var dates = that.getMonths(month);
+            let dateNames = JSON.parse(body);
+            let dates = that.getMonths(month);
             console.log(dateNames);
             console.log(dates);
             let i = 0;
@@ -53,23 +54,27 @@ var showDates = {
 
                 for (; k < y; k++) {
                     if (dates[i].date == dateNames[k].date) {
-                        datesContent += `<tr>
-                        <td>${dates[i].day}</td>
-                        <td>${dateNames[k].name}</td>
-                        </tr>`
+                        datesContent += `<div class="dates" id="${dates[i].day}" data-date="${dates[i].date}">
+                        <p id="dag">${dates[i].fullDate}</p>
+                        <p id="namn">${dateNames[k].name}</p>
+                        </div>`
 
-                        isNot = dates[i].day;
+                        isNot = dates[i].fullDate;
                     }
                 }
-                if (dates[i].day != isNot) {
-                    datesContent += `<tr>
-                    <td>${dates[i].day}</td>
-                    </tr>`
+                if (dates[i].fullDate != isNot) {
+                    datesContent += `<div class="dates" id="${dates[i].day}" data-date="${dates[i].date}">
+                    <p id="dag">${dates[i].fullDate}</p>
+                    </div>`
                 }
             }
             document.getElementById('datum').innerHTML = datesContent;
         })
 
+    },
+    addContent: function(day, content){
+        let allDays = document.getElementById('datum').querySelectorAll('#'+ day);
+        console.log(allDays);
     }
 };
 export { dateNames, showDates }

@@ -9,11 +9,17 @@ function toggleDates(event) {
     let x = parseInt(months);
     showDates.scrapedDates(x);
 }
-let el = window.document.getElementById("knapp");
-// el.addEventListener("click", function (event) {
-//     event.preventDefault()
-// });
-el.addEventListener("click", toggleDates, false);
+
+function addContent() {
+    let day = document.querySelector('input[name = "day"]:checked').value;
+    showDates.addContent(day);
+}
+
+let addMonthClick = window.document.getElementById("knapp");
+addMonthClick.addEventListener("click", toggleDates, false);
+
+let addContentClick = window.document.getElementById("content");
+addContentClick.addEventListener("click", addContent, false);
 
 
 
