@@ -41,40 +41,87 @@ let showDates = {
         request(options).then(function (body) {
             let dateNames = JSON.parse(body);
             let dates = that.getMonths(month);
-            console.log(dateNames);
-            console.log(dates);
+            // console.log(dateNames);
+            // console.log(dates);
             let i = 0;
             let x = dates.length;
             let datesContent = '';
+            let allTextContent = document.getElementById('datum').querySelectorAll('.content');
+            let textContent = '';
+            let datesObject = [];
 
             for (; i < x; i++) {
                 let k = 0;
                 let y = dateNames.length;
                 let isNot = '';
+                datesObject[i] = {};
+
+                for (let t = 0; t < allTextContent.length; t++) {
+                    if (dates[i].day == allTextContent[t].parentElement.id){
+                        textContent = allTextContent[t].innerText;
+                    }
+
+                }
 
                 for (; k < y; k++) {
                     if (dates[i].date == dateNames[k].date) {
+                    
                         datesContent += `<div class="dates" id="${dates[i].day}" data-date="${dates[i].date}">
                         <p id="dag">${dates[i].fullDate}</p>
                         <p id="namn">${dateNames[k].name}</p>
-                        </div>`
+                        <p class="content">${textContent}</p>
+                        </div>`;
+
+                        datesObject[i].date = dates[i].date;
+                        datesObject[i].day = dates[i].day;
+                        datesObject[i].fullDate = dates[i].fullDate;
+                        datesObject[i].name = dateNames[k].name;
 
                         isNot = dates[i].fullDate;
                     }
                 }
+
                 if (dates[i].fullDate != isNot) {
                     datesContent += `<div class="dates" id="${dates[i].day}" data-date="${dates[i].date}">
                     <p id="dag">${dates[i].fullDate}</p>
-                    </div>`
+                    <p id="namn"></p>
+                    <p class="content">${textContent}</p>
+                    </div>`;
+                    textContent = '';
+                    datesObject[i] = {};
+                    datesObject[i].date = dates[i].date;
+                    datesObject[i].day = dates[i].day;
+                    datesObject[i].fullDate = dates[i].fullDate;
                 }
             }
-            document.getElementById('datum').innerHTML = datesContent;
+            
+                console.log(textContent);
+                if (allTextContent.length != 0){
+                    console.log(allTextContent[0].parentElement.id);
+                }
+                
+                document.getElementById('datum').html = '';
+                document.getElementById('datum').innerHTML = datesContent;
+            
         })
 
     },
-    addContent: function(day, content){
-        let allDays = document.getElementById('datum').querySelectorAll('#'+ day);
-        console.log(allDays);
+    addContent: function () {
+        let day = document.querySelector('input[name = "day"]:checked').value;
+        let allDays = document.getElementById('datum').querySelectorAll('#' + day);
+        let content = document.getElementById('content').value;
+
+
+        for (let i = 0; i < allDays.length; i++) {
+            let el = document.createElement('p');
+            el.setAttribute('class', 'content');
+            let text = document.createTextNode(content);
+            el.appendChild(text);
+            allDays[i].appendChild(el);
+        }
+
+        // console.log(allDays.length);
+        // console.log(content);
     }
 };
 export { dateNames, showDates }
